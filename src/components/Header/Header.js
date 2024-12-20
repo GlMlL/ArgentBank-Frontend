@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../../redux/reducers/authUserSlice'; // Action logout
+import { logout } from '../../redux/reducers/authUserSlice'; // Assurez-vous que cette action existe
 import argentBankLogo from '../../img/argentBankLogo.png'; 
 import '../../styles/Header.css';
-import { isAuthenticatedSelector } from '../../redux/reducers/authUserSlice'; // Import du sélecteur
 
 function Header() {
-  const isAuthenticated = useSelector(isAuthenticatedSelector); // Utilisation du sélecteur
-  const user = useSelector((state) => state.authUser.user); // Accès à 'authUser' via le state
+  const auth = useSelector((state) => state.auth); // Accédez à l'état global auth
+  const isAuthenticated = auth && auth.token; // Vérifiez si le token existe
+  const user = auth && auth.user; // Vérifiez si l'utilisateur existe
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

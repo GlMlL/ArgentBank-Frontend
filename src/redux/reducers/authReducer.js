@@ -1,37 +1,30 @@
+import { createSlice } from '@reduxjs/toolkit';
+
 const initialState = {
-    user: null, // L'utilisateur est null au début
-    token: null, // Le token est également null au départ
-    error: null, // Les erreurs d'authentification, si elles existent
-  };
-  
-  const authReducer = (state = initialState, action) => {
-    switch (action.type) {
-      case 'auth/login':
-        return {
-          ...state,
-          user: action.payload.user, // Ajoute l'utilisateur aux données du state
-          token: action.payload.token, // Ajoute le token d'authentification
-          error: null, // Réinitialise l'erreur
-        };
-  
-      case 'auth/logout':
-        return {
-          ...state,
-          user: null, // Réinitialise les informations de l'utilisateur
-          token: null, // Réinitialise le token
-          error: null, // Réinitialise les erreurs
-        };
-  
-      case 'auth/setError':
-        return {
-          ...state,
-          error: action.payload, // Enregistre les erreurs dans l'état
-        };
-  
-      default:
-        return state;
-    }
-  };
-  
-  export default authReducer;
-  
+  user: null,    // L'utilisateur est null par défaut
+  token: null,   // Le token est null par défaut
+  error: null,   // Pas d'erreur initialement
+};
+
+const authUserSlice = createSlice({
+  name: 'auth',
+  initialState,
+  reducers: {
+    login: (state, action) => {
+      state.token = action.payload.token;  // Assurez-vous que le payload contient le token
+      state.user = action.payload.user;    // Assurez-vous que le payload contient l'utilisateur
+      state.error = null;
+    },
+    logout: (state) => {
+      state.token = null;
+      state.user = null;
+      state.error = null;
+    },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
+  },
+});
+
+export const { login, logout, setError } = authUserSlice.actions;
+export default authUserSlice.reducer;
