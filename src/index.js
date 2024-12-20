@@ -1,17 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import './index.css';  
+import App from './App';  
+import reportWebVitals from './reportWebVitals';  
+import 'font-awesome/css/font-awesome.min.css';  
+import { Provider } from 'react-redux';  // Importation du Provider de Redux
+import store from './redux/store';  // Importation du store Redux
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>  {/* Fournit le store Redux à toute l'application */}
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+reportWebVitals();  // Appel optionnel pour mesurer les performances

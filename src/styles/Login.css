@@ -1,0 +1,85 @@
+.main-login {
+    height: 1100px;
+    width: 100%;
+    background-color: #12002b;
+    display: flex;
+    justify-content: center;
+
+}
+
+.main-login .section-login {
+    box-sizing: border-box;
+    width: 300px;
+    height: 365px;
+    margin-top: 3rem;
+    background-color: #FFFFFF;
+    padding: 2rem;
+}
+
+.main-login .section-login .form_header {
+    height: 55px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+    align-items: center;
+}
+
+
+
+.main-login .section-login {
+    display: flex;
+    flex-direction: column;
+    height: 390px;
+}
+
+
+.main-login .section-login .login_check {
+    display: flex;
+    margin-top: 20px;
+    width: 219px;
+}
+
+
+.main-login .section-login .login_check label {
+    margin-left: 5px;
+    margin-top: 0px;
+}
+
+label {
+    display: flex;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+input {
+    display: flex;
+    justify-content: flex-start;
+    height: 20px;
+}
+
+.main-login .section-login .btn-login {
+    width: 252px;
+    height: 38px;
+}
+
+
+.error-login {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.main-login .section-login .form_header h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.fa-user-circle {
+    color: #333;           
+    font-size: 24px;       
+    display: inline-block; 
+    visibility: visible;    
+    opacity: 1;             
+}

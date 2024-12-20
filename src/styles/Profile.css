@@ -1,0 +1,36 @@
+.profile {
+    background-color: #f8f9fa; /* Couleur de fond */
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+  .profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-header h1 {
+    font-size: 2rem;
+    color: #2c3e50;
+  }
+  
+  .profile-main {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-info p {
+    margin: 10px 0;
+    font-size: 1.2rem;
+    color: #34495e;
+  }
+  
+  .profile-info strong {
+    font-weight: bold;
+    color: #2c3e50;
+  }
+  
