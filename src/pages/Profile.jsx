@@ -1,51 +1,49 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchUserProfile } from '../redux/authActions'; 
+import { updateUserProfile } from '../redux/authActions';
 
-import '../styles/Profile.css'; 
-
-function Profile() {
+function ProfileUpdate() {
   const dispatch = useDispatch();
 
-  // Sélecteur pour récupérer les informations utilisateur du Redux store
+  // Récupère les informations de l'utilisateur et le token depuis Redux
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
 
-  
-  useEffect(() => {
-    console.log('Token:', token); // Affiche le token dans la console
-    if (!user && token) {
-      dispatch(fetchUserProfile(token));
-    }
-  }, [user, token, dispatch]);
+  // Gérer l'état des informations à mettre à jour
+  const [userName, setUserName] = useState(user ? user.username : '');
 
-  if (!user) {
-    return <p>Chargement des informations utilisateur...</p>;
-  }
+  // Fonction pour gérer l'envoi de la mise à jour
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const updatedData = { userName }; // Crée l'objet avec les nouvelles données
+    if (token) {
+      dispatch(updateUserProfile(token, updatedData)); // Appel à l'action Redux pour mettre à jour le profil
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      setUserName(user.username); // Pré-remplir le champ avec le nom actuel
+    }
+  }, [user]);
 
   return (
-    <>
-      
-      <div className="profile">
-        <header className="profile-header">
-          <h1>Bienvenue sur votre profil</h1>
-        </header>
-        <main className="profile-main">
-          <div className="profile-info">
-            <p>
-              <strong>Nom complet : </strong> {user.firstName} {user.lastName}
-            </p>
-            <p>
-              <strong>Pseudo : </strong> {user.username}
-            </p>
-            <p>
-              <strong>Email : </strong> {user.email}
-            </p>
-          </div>
-        </main>
-      </div>
-    </>
+    <div className="profile-update">
+      <h2>Mettre à jour votre profil</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="userName">Nom d'utilisateur :</label>
+          <input
+            type="text"
+            id="userName"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)} // Met à jour l'état lors de la saisie
+          />
+        </div>
+        <button type="submit">Mettre à jour</button>
+      </form>
+    </div>
   );
 }
 
-export default Profile;
+export default ProfileUpdate;
