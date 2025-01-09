@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux"; // Hook pour dispatcher des actions R
 import axios from "axios"; // Pour les requêtes HTTP
 import '../styles/Login.css';
 import { login } from '../redux/reducers/authUserSlice'; 
-
 import Formular from "../components/Formular/Formular"; 
 import Button from "../components/Button/Button"; 
 
@@ -28,32 +27,25 @@ function Login() {
     };
 
     try {
-      // Envoi de la requête vers l'API d'authentification
-      const response = await axios.post(
-        "http://localhost:3001/api/v1/user/login",
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
+      const response = await axios.post("http://localhost:3001/api/v1/user/login", formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    
       if (response.status === 200) {
-        // Récupération et stockage du token
         const token = response.data.body.token;
-        localStorage.setItem("authToken", token); // Sauvegarde locale du token
-        dispatch(login({ token })); // Action Redux pour authentifier l'utilisateur
-
-        // Redirection vers la page profil
+        const user = { email }; // Ajoutez ici toutes les informations utilisateur nécessaires
+        localStorage.setItem("authToken", token);
+        dispatch(login({ token, user })); // Incluez `user` ici
         navigate("/profile");
       } else {
-        setErrorMessage(response.statusText); // Mise à jour du message d'erreur
+        setErrorMessage(response.statusText);
       }
     } catch (error) {
-      // Gestion des erreurs
       setErrorMessage("Une erreur s'est produite. Vérifiez vos identifiants.");
     }
+    
   };
 
   return (

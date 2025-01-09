@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   user: null,
-  token: localStorage.getItem('authToken') || null, // Utilisation du token en localStorage
-  error: null,
+  token: localStorage.getItem('authToken') || null, // Récupération du token dans localStorage
+  error: null, // Gestion des erreurs
 };
 
 const authUserSlice = createSlice({
@@ -11,8 +11,8 @@ const authUserSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
-      state.token = action.payload.token;
-      state.user = action.payload.user;
+      state.token = action.payload.token; // Stocke le token dans l'état global
+      state.user = action.payload.user || null; // Récupération des données utilisateur
       state.error = null;
     },
     logout: (state) => {
@@ -29,8 +29,8 @@ const authUserSlice = createSlice({
   },
 });
 
-// Sélecteur pour vérifier l'authentification
-export const isAuthenticatedSelector = (state) => !!state.authUser.token && !!state.authUser.user;
+// Sélecteur pour vérifier si l'utilisateur est authentifié (modifié pour tolérer user null)
+export const isAuthenticatedSelector = (state) => !!state.authUser?.token;
 
 export const { login, logout, userProfile, setError } = authUserSlice.actions;
 
