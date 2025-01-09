@@ -28,16 +28,14 @@ function Login() {
 
     try {
       const response = await axios.post("http://localhost:3001/api/v1/user/login", formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       });
     
       if (response.status === 200) {
         const token = response.data.body.token;
-        const user = { email }; // Ajoutez ici toutes les informations utilisateur nécessaires
+        const user = { email }; // Vérifiez que vous obtenez toutes les données nécessaires
         localStorage.setItem("authToken", token);
-        dispatch(login({ token, user })); // Incluez `user` ici
+        dispatch(login({ token, user })); // Incluez correctement le token et l'utilisateur
         navigate("/profile");
       } else {
         setErrorMessage(response.statusText);
@@ -45,6 +43,7 @@ function Login() {
     } catch (error) {
       setErrorMessage("Une erreur s'est produite. Vérifiez vos identifiants.");
     }
+    
     
   };
 

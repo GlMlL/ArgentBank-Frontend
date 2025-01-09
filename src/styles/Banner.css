@@ -1,0 +1,83 @@
+.hero_banner {
+    width: 100%;
+    height: 440px;
+    background-image: url("../img/bank-tree.jpeg");
+
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0 -50px;
+    position: relative;
+
+}
+
+.hero_banner .content_hero_banner {
+    background-color: #FFFFFF;
+    position: relative;
+    top: 4rem;
+    width: 200px;
+    padding: 2rem;
+    text-align: left;
+    margin: 0 auto;
+}
+
+@media (min-width: 390px) {
+    .hero_banner .content_hero_banner {
+        margin: 0 0 0 390px;
+    }
+}
+
+
+.content_hero_banner .subtitle {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.content_hero_banner .text {
+    font-size: 1rem;
+}
+
+@media (min-width: 920px) {
+    .hero_banner {
+        height: 400px;
+        background-position: 0% 33%;
+    }
+
+    .hero_banner .content_hero_banner {
+        position: absolute;
+        top: 50px;
+        right: 50px;
+        width: 300px;
+        margin: 2rem;
+    }
+
+    .hero_banner .content_hero_banner .subtitle {
+        font-size: 1.5rem;
+        margin: 0;
+    }
+
+    .hero_banner .content_hero_banner .text {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 700px){
+    .hero_banner .content_hero_banner {
+        position: absolute;
+        top: 50px;
+        right: 50px;
+        width: 300px;
+        margin: 2rem;
+    }
+
+}
+
+@media (max-width: 500px){
+    .hero_banner .content_hero_banner {
+        position: absolute;
+        top: 50px;
+        right: 50px;
+        width: 150px;
+    }
+
+}
