@@ -2,6 +2,9 @@
     background-color: #f8f9fa; /* Couleur de fond */
     padding: 20px;
     min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
   
   .profile-header {
@@ -34,3 +37,19 @@
     color: #2c3e50;
   }
   
+
+.profile-update{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #12002b;
+  width: 100%;
+  height: 1145px;
+}
+
+.card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUserProfile } from "../redux/authActions";
+import UserMoney from "../components/UserMoney/UserMoney"; 
+import accountData from '../store/accountData.json';
+import '../styles/Profile.css';
+
 
 function ProfileUpdate() {
   
@@ -61,6 +65,16 @@ function ProfileUpdate() {
         </div>
         <button type="submit">Mettre à jour</button>
       </form>
+      <section className="card">
+                {accountData.accounts.map((account, index) => (
+                    <UserMoney 
+                        key={index}
+                        title={account.title} 
+                        content={account.content} 
+                        subtitle={account.subtitle} 
+                    />
+                ))}
+            </section>
     </div>
   );
 }

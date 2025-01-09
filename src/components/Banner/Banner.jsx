@@ -6,7 +6,7 @@ function banner() {
     return (
         <section className="hero_banner">
             <article className="content_hero_banner">
-                {/*<h2 className="hidden">Promoted Content</h2>*/}
+                
 
                 <p className="subtitle">No fees.</p>
                 <p className="subtitle">No minimum deposit.</p>

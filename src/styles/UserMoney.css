@@ -1,0 +1,50 @@
+.account {
+    width: 80%;
+    height: auto;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    border: 1px solid black;
+    margin-bottom: 2rem;
+    padding: 1rem;
+}
+
+.account .account_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+.account .account_content .account_title {
+    font-size: 15px;
+    margin-bottom: -2px;
+}
+
+.account .account_content .money {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.account .acount_subtitle {
+    margin-top: -4px;
+}
+
+button {
+    background-color: #00bc77;
+    border-color: #00bc77;
+    border-radius: 0;
+    width: 250px;
+}
+
+@media (min-width: 720px) {
+    .account {
+        flex-direction: row;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0.75rem;
+    }
+}
