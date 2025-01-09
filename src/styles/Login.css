@@ -58,8 +58,15 @@ input {
 }
 
 .main-login .section-login .btn-login {
-    width: 252px;
-    height: 38px;
+    display: block;
+    width: 100%;
+    padding: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    border-color: rgb(0, 188, 119);
+    background-color: rgb(0, 188, 119);
+    color: rgb(255, 255, 255);
 }
 
 

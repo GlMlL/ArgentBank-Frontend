@@ -88,7 +88,8 @@ function Login() {
             </div>
 
             {/* Bouton de connexion */}
-            <Button style={{ textDecoration: "underline" }} content="Sign In" className="btn-login" />
+            <Button text="Sign In" className="btn-login" />
+
           </form>
         </section>
       </main>
