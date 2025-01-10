@@ -10,10 +10,10 @@ function userMoney({ title, subtitle, content }) {
                 <span className="money">{content}</span>
                 <p className="acount_subtitle">{subtitle}</p>
             </div>
-            <Button content="View Transactions" />
+            <Button text="View transactions" />
         </article>
     )
 }
 
 export default userMoney
-// Ce composant représente les informations sur le compte utilisateur, il peut être réutilisable.
+// Ce composant représente les informations sur le compte utilisateur.
