@@ -88,7 +88,7 @@ function Login() {
             </div>
 
             {/* Bouton de connexion */}
-            <Button text="Sign In" className="btn-login" />
+            <Button content="Sign In" className="btn-login" />
 
           </form>
         </section>

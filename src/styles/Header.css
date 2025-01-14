@@ -1,48 +1,45 @@
-.main-nav {
+header {
+    background-color: #FFFFFF;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
-    background-color: #f8f8f8; /* Couleur de fond de la barre de navigation */
-    height: 60px; /* Hauteur de la barre de navigation */
+    padding: 5px;
+    position: relative;
+    z-index: 1;
+    height: 80px;
 }
 
-.main-nav-logo {
-    display: flex;
-    align-items: center;
+header .logo {
+    width: 200px;
+    max-width: 100%;
 }
 
-.main-nav-logo-image {
-    height: 40px; /* Ajuster la taille du logo */
-    margin-right: 10px; /* Espacement entre le logo et le texte si nécessaire */
+.header .logo:hover {
+    cursor: pointer;
 }
 
-.main-nav-item {
-    color: #2c3e50; /* Couleur du texte pour "Sign In" et "Sign Out" */
-    text-decoration: none; /* Supprimer le soulignement */
-    font-size: 18px; /* Taille du texte */
-    display: flex;
-    align-items: center; /* Alignement vertical centré */
-    transition: color 0.3s ease; /* Transition pour un effet hover */
+.link i {
+    margin-right: 10px;
+    color: black;
 }
 
-.main-nav-item:hover {
-    color: #1abc9c; /* Couleur survol pour "Sign In" et "Sign Out" */
+.link {
+    margin-right: 0.5rem;
+    text-decoration: inherit;
+    font-weight: bold;
+    color: black;
 }
 
-.main-nav-item i {
-    margin-right: 5px; /* Espacement entre l'icône et le texte */
-    font-size: 24px; /* Taille de l'icône */
+.link:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
-/* Style spécifique pour "Sign Out" */
-.main-nav-item.sign-out {
-    font-weight: bold; /* Met "Sign Out" en gras */
-    cursor: pointer; /* Ajoute un curseur pointeur */
-    color: #e74c3c; /* Couleur rouge pour "Sign Out" */
-    transition: color 0.3s ease; /* Transition pour un effet hover */
-}
+@media (max-width: 425px){
+    .header_nav {
+        display: flex;
+        flex-direction: column;
+    }
 
-.main-nav-item.sign-out:hover {
-    color: #c0392b; /* Couleur survol pour "Sign Out" */
 }

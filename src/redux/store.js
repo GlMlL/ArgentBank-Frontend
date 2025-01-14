@@ -1,10 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit'; // Utilisation de Redux Toolkit
-import rootReducer from './reducers/rootReducer'; // Import du rootReducer
+// src/redux/store.js
 
-// Configuration du store Redux
+import { configureStore } from '@reduxjs/toolkit';
+import userReducer from './reducers/userSlice';  
+
 const store = configureStore({
-  reducer: rootReducer, // Utilisation du rootReducer combiné
-  devTools: process.env.NODE_ENV !== 'production', // Activer Redux DevTools en développement
+  reducer: {
+    user: userReducer,  
+  },
 });
 
 export default store;

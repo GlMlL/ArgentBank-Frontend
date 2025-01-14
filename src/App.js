@@ -6,10 +6,11 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import { isAuthenticatedSelector } from './redux/reducers/authUserSlice';
+
 
 function App() {
-  const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const isAuthenticated = useSelector((state) => state.user?.isAuthenticated || false);
+ // Utilisez `state.user` ici
 
   return (
     <Router>

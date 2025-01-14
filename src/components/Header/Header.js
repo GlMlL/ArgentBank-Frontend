@@ -1,64 +1,54 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../../redux/reducers/authUserSlice';
-import { isAuthenticatedSelector } from '../../redux/reducers/authUserSlice';
-import argentBankLogo from '../../img/argentBankLogo.png';
+import React, { useEffect } from "react";
 import '../../styles/Header.css';
+import Logo from '../../../src/img/argentBankLogo.webp';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from '../../redux/reducers/authUserSlice';
 
 function Header() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+    const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+    const dispatch = useDispatch();
+    const userProfile = useSelector((state) => state.user);
 
-  // Sélecteurs sécurisés
-  const isAuthenticated = useSelector(isAuthenticatedSelector);
-  const user = useSelector((state) => state.auth?.user || null); // Assure que user est défini ou null
+    const handleSignOut = () => {
+        dispatch(logout());
+    };
 
-  const handleSignOut = () => {
-    dispatch(logout());
-    localStorage.removeItem('authToken');
-    navigate('/');
-  };
+    useEffect(() => {
+        const token = localStorage.getItem("authToken");
+        if (token) {
+            
+        }
+    }, [dispatch]);
 
-  return (
-    <nav className="main-nav">
-      <Link className="main-nav-logo" to="/">
-        <img
-          className="main-nav-logo-image"
-          src={argentBankLogo}
-          alt="Argent Bank Logo"
-        />
-        <h1 className="sr-only">Argent Bank</h1>
-      </Link>
-      <div>
-        {isAuthenticated ? (
-          <div className="main-nav-item">
-            <i className="fa fa-user-circle"></i>
-            <span>Welcome, {user?.username || 'User'}</span>
-            <button
-              className="sign-out-button"
-              onClick={handleSignOut}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: 'inherit',
-                cursor: 'pointer',
-                marginLeft: '10px',
-              }}
-            >
-              <i className="fa fa-sign-out"></i>
-              Sign Out
-            </button>
-          </div>
-        ) : (
-          <Link className="main-nav-item" to="/login">
-            <i className="fa fa-user-circle"></i>
-            Sign In
-          </Link>
-        )}
-      </div>
-    </nav>
-  );
+    return (
+        <header>
+            <Link to="/">
+                <img className="logo" src={Logo} alt="logo Argent Bank" />
+            </Link>
+            <nav className="header_nav">
+                {isAuthenticated ? (
+                    <>
+                        <Link to="/profile" className="link">
+                            <i className="fa fa-user-circle icon-header"></i>
+                            {userProfile.userName ? userProfile.userName : userProfile.firstName}
+                        </Link>
+                        <Link to="/login" onClick={handleSignOut} className="link">
+                            <i className="fa fa-sign-out icon-header"></i>
+                            Sign Out
+                        </Link>
+                    </>
+                ) : (
+                    <Link to="/login" className="link">
+                        <i className="fa fa-user-circle icon-header"></i>
+                        Sign In
+                    </Link>
+                )}
+            </nav>
+        </header>
+    );
 }
 
 export default Header;
+
+

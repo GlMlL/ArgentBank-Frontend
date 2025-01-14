@@ -1,0 +1,39 @@
+.section-user {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.section-user .title-user {
+    color: #FFFFFF;
+    margin-bottom: 5px;
+}
+
+.section-user .modal {
+    height: auto;
+    background-color: #FFFFFF;
+    padding: 22px;
+}
+
+.section-user form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal .userButton {
+    display: flex;
+    gap: 15px;
+    padding-right: 70px;
+}
+
+.section-user button {
+    width: 150px;
+}
+@media (max-width: 600px) {
+    .section-user .modal {
+       width: 250px;
+    }
+}

@@ -10,7 +10,7 @@ function userMoney({ title, subtitle, content }) {
                 <span className="money">{content}</span>
                 <p className="acount_subtitle">{subtitle}</p>
             </div>
-            <Button text="View transactions" />
+            <Button content="View Transactions" />
         </article>
     )
 }
