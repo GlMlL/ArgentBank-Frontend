@@ -1,0 +1,100 @@
+openapi: 3.0.0
+info:
+  title: Transaction API
+  description: API for managing transactions and related operations.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api/v1
+    description: Local development server
+paths:
+  /transactions/{transactionId}:
+    patch:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Update Transaction Information
+      description: API to update specific fields of a transaction
+      parameters:
+        - name: transactionId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the transaction to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                field:
+                  type: string
+                  description: The field to update (e.g., status, category)
+                value:
+                  type: string
+                  description: The new value for the field
+              required:
+                - field
+                - value
+      responses:
+        '200':
+          description: Transaction updated successfully
+        '400':
+          description: Invalid request payload
+        '401':
+          description: Unauthorized access
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal server error
+
+  /transactions/{transactionId}/note:
+    patch:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Add or Update Transaction Note
+      description: API to add or update a note for a specific transaction
+      parameters:
+        - name: transactionId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the transaction to add or update the note
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                note:
+                  type: string
+                  description: The content of the note
+              required:
+                - note
+      responses:
+        '200':
+          description: Note added or updated successfully
+        '400':
+          description: Invalid request payload
+        '401':
+          description: Unauthorized access
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal server error
+
+components:
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string

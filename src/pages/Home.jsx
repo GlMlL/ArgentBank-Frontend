@@ -3,9 +3,9 @@ import '../styles/Home.css';
 import img_chat from "../../src/img/icon-chat.webp";
 import img_money from "../../src/img/icon-money.webp";
 import img_security from "../../src/img/icon-security.webp";
-import Features from '../components/Feature/Feature.js';
+import Feature from '../components/Feature/Feature.jsx';
 import Banner from '../components/Banner/Banner.jsx';
-import featuresData from '../store/featureData.json'; // Import du fichier JSON
+import featureData from '../data/featureData.json'; // Import du fichier JSON
 
 const images = {
   img_chat,
@@ -18,8 +18,8 @@ function Home() {
       <main className='main_home'>
           <Banner />
           <div className='Features_card'>
-              {featuresData.map((feature, index) => (
-                  <Features
+              {featureData.map((feature, index) => (
+                  <Feature
                       key={index}
                       image={images[feature.image]}  // Utilisation de l'image importée
                       alt={feature.alt}

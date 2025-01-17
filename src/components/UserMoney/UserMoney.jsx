@@ -16,4 +16,3 @@ function userMoney({ title, subtitle, content }) {
 }
 
 export default userMoney
-// Ce composant représente les informations sur le compte utilisateur.
