@@ -4,28 +4,27 @@ import axios from "axios";
 // Fonction pour récupérer le token stocké dans le localStorage
 const storedToken = localStorage.getItem('authToken');
 
-// Fonction pour récupérer les informations utilisateur depuis le localStorage
+// Fonction pour récupérer les informations de l'utilisateur depuis le localStorage
 const getUserInfo = () => {
-  const userInfoString = localStorage.getItem("userInfo");
-  if (userInfoString) {
-      return JSON.parse(userInfoString); // Convertir la chaîne JSON en objet JavaScript
-  } else {
-      // Valeurs par défaut pour userInfo
-      return {
-          firstName: "",
-          lastName: "",
-          userName: "Guest", // Valeur par défaut pour userName si non défini
-          email: "",
-      };
-  }
+    const userInfoString = localStorage.getItem("userInfo");
+    if (userInfoString) {
+        return JSON.parse(userInfoString); // Convertir la chaîne JSON en objet JavaScript
+    } else {
+        return {
+            firstName: "",
+            lastName: "",
+            userName: "",
+            email: "",
+        };
+    }
 };
 
 // Création du slice Redux pour l'utilisateur et l'authentification
 const userSlice = createSlice({
     name: "user",
     initialState: {
-        token: storedToken || null, // Utilisation du token stocké dans le localStorage
-        isAuthenticated: storedToken ? true : false, // Authentifié si le token est présent
+        token:  null,
+        isAuthenticated: null, // Authentifié si le token est présent
         error: null,
         ...getUserInfo(), // Utiliser les infos utilisateurs stockées si disponibles
     },
@@ -35,7 +34,7 @@ const userSlice = createSlice({
         login(state, action) {
             state.isAuthenticated = true;
             state.token = action.payload.token;
-            localStorage.setItem("authToken", action.payload.token); // Stocker le token dans le localStorage
+            //localStorage.setItem("authToken", action.payload.token); // Stocker le token dans le localStorage
         },
 
         // Action pour la déconnexion de l'utilisateur
@@ -44,7 +43,7 @@ const userSlice = createSlice({
             state.token = null;
             state.firstName = "";
             state.lastName = "";
-            state.userName = "Guest"; // Remise à la valeur par défaut
+            state.userName = "";
             state.email = "";
             localStorage.removeItem("authToken");
             localStorage.removeItem("userInfo");
@@ -57,14 +56,11 @@ const userSlice = createSlice({
 
         // Action pour mettre à jour le profil de l'utilisateur
         userProfile(state, action) {
-            console.log("Updated user profile data:", action.payload);
             state.firstName = action.payload.firstName;
             state.lastName = action.payload.lastName;
-            state.userName = action.payload.userName || "Guest";  // Assurez-vous que userName n'est jamais nul
+            state.userName = action.payload.userName;
             state.email = action.payload.email;
-
-            // Mettre à jour le localStorage avec les nouvelles données
-            localStorage.setItem("userInfo", JSON.stringify(state));
+            localStorage.setItem("userInfo", JSON.stringify(action.payload)); // Stocker les infos dans le localStorage
         },
 
         // Action pour mettre à jour uniquement le champ userName
@@ -88,7 +84,7 @@ const userSlice = createSlice({
                 // Mise à jour de l'état avec les données récupérées
                 state.firstName = response.data.body.firstName;
                 state.lastName = response.data.body.lastName;
-                state.userName = response.data.body.userName || "Guest"; // Valeur par défaut si userName est manquant
+                state.userName = response.data.body.userName;
                 state.email = response.data.body.email;
 
                 // Stocker les nouvelles informations dans le localStorage

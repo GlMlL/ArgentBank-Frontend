@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'; 
 import '../../styles/Formular.css';
 
-function formular({ label, type, content, value, onChange, placeholder, autocomplete }) {
+function Formular({ label, type, content, value, onChange, placeholder, autocomplete, readOnly }) {
     return (
         <div className='form_content'>
             <label htmlFor={content}>{label}</label>
@@ -13,9 +13,10 @@ function formular({ label, type, content, value, onChange, placeholder, autocomp
                 placeholder={placeholder} 
                 onChange={onChange} 
                 autoComplete={autocomplete} 
+                readOnly={readOnly} // Ajout explicite de l'attribut readOnly
             />
         </div>
     );
 }
 
-export default formular;
+export default Formular;

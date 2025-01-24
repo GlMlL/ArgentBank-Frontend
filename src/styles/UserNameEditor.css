@@ -21,12 +21,13 @@
 .section-user form {
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .modal .userButton {
     display: flex;
     gap: 15px;
-    padding-right: 70px;
+    
 }
 
 .section-user button {
