@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Fonction pour récupérer le token stocké dans le localStorage
-const storedToken = localStorage.getItem('authToken');
+
 
 // Fonction pour récupérer les informations de l'utilisateur depuis le localStorage
 const getUserInfo = () => {

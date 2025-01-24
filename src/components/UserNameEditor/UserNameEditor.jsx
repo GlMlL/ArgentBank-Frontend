@@ -33,7 +33,7 @@ function UserNameEditor() {
                 }
             )
             if (response.status === 200) {
-                const respData = response.data // extrait les données de la réponse de la requête
+                
                 dispatch(updateUsername(editedName)) // mise à jour username dans store
                 setIsOpen(false)
             } else {
