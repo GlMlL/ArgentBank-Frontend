@@ -13,8 +13,8 @@ function Login() {
     const dispatch = useDispatch() // useDispatch pour dispatcher des actions Redux
 
     // Stockage des valeurs form
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState("") // State local pour stocker l'email saisi
+    const [password, setPassword] = useState("") // State local pour stocker le mot de passe saisi
     const [errorMessage, setErrorMessage] = useState("")
     const [remember, setRemember] = useState(false)
 

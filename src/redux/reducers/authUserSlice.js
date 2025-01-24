@@ -31,8 +31,8 @@ const userSlice = createSlice({
     reducers: {
         // Action pour la connexion de l'utilisateur
         login(state, action) {
-            state.isAuthenticated = true;
-            state.token = action.payload.token;
+            state.isAuthenticated = true; // Modifier le state global
+            state.token = action.payload.token; // Stocker le token dans le state global
             //localStorage.setItem("authToken", action.payload.token); // Stocker le token dans le localStorage
         },
 
