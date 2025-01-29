@@ -8,7 +8,8 @@ import Button from "../Button/Button";
 
 function UserNameEditor() {
     const dispatch = useDispatch()
-    const userProfile = useSelector((state) => state.user) // récupération des données user
+    const userProfile = useSelector((state) => state.user.userInfo) ?? { firstName: "", lastName: "", userName: "", email: "" };
+// récupération des données user
     const userToken = useSelector((state) => state.user.token) // récupération du token
 
     const [isOpen, setIsOpen] = useState(false) // formulaire fermé par défaut
@@ -56,9 +57,10 @@ function UserNameEditor() {
     }
 
     useEffect(() => {
-        setUserName(userProfile.userName) // mise à jour username pour userProfile
+        setUserName(userProfile.userName); // mise à jour username pour userProfile
         
-    }, [userProfile.userName])
+        
+    }, [userProfile.userName ,userProfile.userEmail])
 
     return (
         <section className="section-user">
@@ -66,17 +68,15 @@ function UserNameEditor() {
                 // Mode édition désactivé
                 <>
                     <h2 className="title-user">
-                        Welcome back
-                        <br />
-                        {!userProfile.userName ? (
-                            <>
-                                {userProfile.firstName} {userProfile.lastName}
-                            </>
-                        ) : (
-                            <>{userProfile.userName} </>
-                        )}
-                        !
-                    </h2>
+    Welcome back
+    <br />
+    {userProfile?.userName ? (
+        <>{userProfile.userName}</>
+    ) : (
+        <>{userProfile?.firstName} {userProfile?.lastName}</>
+    )}
+    !
+</h2>
                     <Button
                         content="Edit Name"
                         onClick={() => {
@@ -94,25 +94,26 @@ function UserNameEditor() {
                                 label="User Name :" 
                                 type="text" 
                                 content="userName" 
-                                placeholder={userProfile.userName} // Ajout du placeholder pour le nom d'utilisateur actuel
+                                placeholder={userProfile.userName} 
                                 onChange={(event) => setUserName(event.target.value)} 
                             />
                             <Formular
-    label="First Name :"
-    type="text"
-    content="firstName"
-    value={userProfile.firstName || "First Name Not Provided"} 
-    readOnly // Marque explicitement le champ comme non modifiable
-/>
+                                label="First Name :"
+                                type="text"
+                                content="firstName"
+                                value={userProfile.firstName || "First Name Not Provided"} 
+                                readOnly 
+                            />
 
-<Formular
-    label="Last Name :"
-    type="text"
-    content="lastName"
-    value={userProfile.lastName || "Last Name Not Provided"} 
-    readOnly // Marque explicitement le champ comme non modifiable
-/>
-                            
+                            <Formular
+                                label="Last Name :"
+                                type="text"
+                                content="lastName"
+                                value={userProfile.lastName || "Last Name Not Provided"} 
+                                readOnly 
+                            />
+
+        
                             <div className="userButton">
                                 <Button content="Save" width="80px" height="40px" />
                                 <Button

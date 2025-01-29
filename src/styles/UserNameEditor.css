@@ -8,7 +8,7 @@
 }
 
 .section-user .title-user {
-    color: #141010;
+    color: #FFFFFF;
     margin-bottom: 5px;
 }
 
@@ -29,6 +29,11 @@
     gap: 15px;
     
 }
+
+.input#firstName{
+
+}
+
 
 .section-user button {
     width: 150px;

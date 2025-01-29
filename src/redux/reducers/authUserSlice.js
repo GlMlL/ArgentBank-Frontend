@@ -25,7 +25,7 @@ const userSlice = createSlice({
         token:  null,
         isAuthenticated: null, // Authentifié si le token est présent
         error: null,
-        ...getUserInfo(), // Utiliser les infos utilisateurs stockées si disponibles
+        userInfo: getUserInfo() || { firstName: "", lastName: "", userName: "", email: "" }, // Utilise les infos utilisateurs stockées si disponibles
     },
 
     reducers: {
@@ -64,7 +64,7 @@ const userSlice = createSlice({
 
         // Action pour mettre à jour uniquement le champ userName
         updateUsername(state, action) {
-            state.userName = action.payload;
+            state.userInfo.userName = action.payload;
             const userInfo = { ...state }; // Copier l'état utilisateur actuel
             localStorage.setItem("userInfo", JSON.stringify(userInfo)); // Mettre à jour localStorage
         },
@@ -81,10 +81,7 @@ const userSlice = createSlice({
                 const response = await axios.get('http://localhost:3001/api/v1/user/profile', config);
 
                 // Mise à jour de l'état avec les données récupérées
-                state.firstName = response.data.body.firstName;
-                state.lastName = response.data.body.lastName;
-                state.userName = response.data.body.userName;
-                state.email = response.data.body.email;
+                state.userInfo = response.data.body || { firstName: "", lastName: "", userName: "", email: "" }; ;
 
                 // Stocker les nouvelles informations dans le localStorage
                 localStorage.setItem("userInfo", JSON.stringify(response.data.body));

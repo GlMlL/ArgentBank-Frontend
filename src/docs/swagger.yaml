@@ -3,111 +3,74 @@ openapi: 3.0.0
 
 # Informations générales sur l'API
 info:
-  title: Transaction API  # Titre de l'API
-  description: API for managing transactions and related operations.  # Description de l'API
-  version: 1.0.0  # Version de l'API
+  title: Transaction API
+  description: API for managing transactions and related operations.
+  version: 1.0.0
 
-# Serveur sur lequel l'API est hébergée (en développement local ici)
+# Serveur sur lequel l'API est hébergée
 servers:
-  - url: http://localhost:3000/api/v1  # URL de l'API en développement
-    description: Local development server  # Description du serveur
+  - url: http://localhost:3000/api/v1
+    description: Local development server
 
 # Définition des différents chemins (routes) de l'API
 paths:
 
-  # Route pour mettre à jour une transaction spécifique
+  # Route unique pour mettre à jour une transaction (générale ou note)
   /transactions/{transactionId}:
-    patch:  # La méthode HTTP PATCH est utilisée pour mettre à jour des ressources existantes
+    patch:
       security:
-        - Bearer: []  # Utilisation d'un token d'authentification Bearer
+        - BearerAuth: []  # Correction ici : le nom doit correspondre à la définition ci-dessous
       tags:
-        - Transaction Module  # Ce tag est un moyen de catégoriser l'endpoint (ici dans le module transaction)
-      summary: Update Transaction Information  # Résumé rapide de l'action effectuée par cette route
-      description: API to update specific fields of a transaction  # Description plus détaillée
+        - Transaction Module
+      summary: Update Transaction Information or Note
+      description: API to update specific fields of a transaction, including notes.
       parameters:
-        # Paramètre dans l'URL pour spécifier l'ID de la transaction à mettre à jour
         - name: transactionId
-          in: path  # Ce paramètre est passé dans l'URL, dans le "path"
-          required: true  # Ce paramètre est requis
+          in: path
+          required: true
           schema:
-            type: string  # Le type du paramètre est une chaîne de caractères
-          description: ID of the transaction to update  # Description du paramètre
+            type: string
+          description: ID of the transaction to update
       requestBody:
-        required: true  # Le corps de la requête est obligatoire
+        required: true
         content:
-          application/json:  # Le corps doit être au format JSON
+          application/json:
             schema:
-              type: object  # Le corps de la requête est un objet
+              type: object
               properties:
                 field:
-                  type: string  # Le champ à mettre à jour est une chaîne de caractères
-                  description: The field to update (e.g., status, category)  # Description de ce champ
+                  type: string
+                  description: The field to update (e.g., status, category, note)
                 value:
-                  type: string  # La nouvelle valeur du champ est une chaîne de caractères
-                  description: The new value for the field  # Description de la nouvelle valeur
+                  type: string
+                  description: The new value for the field
               required:
-                - field  # Le champ "field" est obligatoire
-                - value  # La nouvelle valeur "value" est obligatoire
+                - field
+                - value
       responses:
-        '200':  # Réponse OK, transaction mise à jour avec succès
+        '200':
           description: Transaction updated successfully
-        '400':  # Mauvaise requête (par exemple, données mal formées)
+        '400':
           description: Invalid request payload
-        '401':  # Accès non autorisé (problème avec le token)
+        '401':
           description: Unauthorized access
-        '404':  # La transaction spécifiée n’a pas été trouvée
+        '404':
           description: Transaction not found
-        '500':  # Erreur interne du serveur
+        '500':
           description: Internal server error
 
-  # Route pour ajouter ou mettre à jour une note sur une transaction
-  /transactions/{transactionId}/note:
-    patch:  # Méthode PATCH pour mettre à jour une note
-      security:
-        - Bearer: []  # Utilisation d'un token d'authentification Bearer
-      tags:
-        - Transaction Module  # Tag de cette route, dans le même module
-      summary: Add or Update Transaction Note  # Résumé de l'action effectuée par cette route
-      description: API to add or update a note for a specific transaction  # Description détaillée de l’action
-      parameters:
-        - name: transactionId
-          in: path  # Paramètre dans l'URL, dans le path
-          required: true  # Ce paramètre est requis
-          schema:
-            type: string  # Le type de ce paramètre est une chaîne de caractères
-          description: ID of the transaction to add or update the note  # Description de ce paramètre
-      requestBody:
-        required: true  # Le corps de la requête est obligatoire
-        content:
-          application/json:  # Le corps doit être au format JSON
-            schema:
-              type: object  # Le corps de la requête est un objet
-              properties:
-                note:
-                  type: string  # La note est une chaîne de caractères
-                  description: The content of the note  # Description de la note
-              required:
-                - note  # Le champ "note" est obligatoire
-      responses:
-        '200':  # Réponse OK, note ajoutée ou mise à jour avec succès
-          description: Note added or updated successfully
-        '400':  # Mauvaise requête (par exemple, données mal formées)
-          description: Invalid request payload
-        '401':  # Accès non autorisé
-          description: Unauthorized access
-        '404':  # La transaction spécifiée n’a pas été trouvée
-          description: Transaction not found
-        '500':  # Erreur interne du serveur
-          description: Internal server error
-
-# Composants réutilisables dans l'API (par exemple, réponse générique)
+# Composants réutilisables
 components:
+  securitySchemes:
+    BearerAuth:  # Définition du schéma de sécurité Bearer
+      type: http
+      scheme: bearer
+      bearerFormat: JWT  # Format du token (JSON Web Token)
   schemas:
-    # Définition d'une réponse générique de l'API
     ApiResponse:
-      type: object  # Le type de la réponse est un objet
+      type: object
       properties:
         status:
-          type: string  # Le statut de la réponse est une chaîne de caractères
+          type: string
         message:
-          type: string  # Le message associé à la réponse est également une chaîne de caractères
+          type: string
