@@ -1,55 +1,37 @@
-# Version de l'OpenAPI
-openapi: 3.0.0
-
-# Informations générales sur l'API
+swagger: '2.0'
 info:
   title: Transaction API
   description: API for managing transactions and related operations.
-  version: 1.0.0
+  version: '1.0.0'
 
-# Serveur sur lequel l'API est hébergée
-servers:
-  - url: http://localhost:3000/api/v1
-    description: Local development server
+host: localhost:3000
+basePath: /api/v1
+schemes:
+  - http
 
-# Définition des différents chemins (routes) de l'API
 paths:
-
-  # Route unique pour mettre à jour une transaction (générale ou note)
-  /transactions/{transactionId}:
+  /user/transactionId:
     patch:
       security:
-        - BearerAuth: []  # Correction ici : le nom doit correspondre à la définition ci-dessous
+        - Bearer: []  # Correspondance avec la définition de sécurité
       tags:
         - Transaction Module
       summary: Update Transaction Information or Note
       description: API to update specific fields of a transaction, including notes.
       parameters:
-        - name: transactionId
-          in: path
+        - in: body
+          name: body
+          description: Fields to update in the transaction
           required: true
           schema:
-            type: string
-          description: ID of the transaction to update
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                field:
-                  type: string
-                  description: The field to update (e.g., status, category, note)
-                value:
-                  type: string
-                  description: The new value for the field
-              required:
-                - field
-                - value
+            $ref: '#/definitions/TransactionUpdate'
+      produces:
+        - application/json
       responses:
         '200':
           description: Transaction updated successfully
+          schema:
+            $ref: '#/definitions/ApiResponse'
         '400':
           description: Invalid request payload
         '401':
@@ -59,18 +41,32 @@ paths:
         '500':
           description: Internal server error
 
-# Composants réutilisables
-components:
-  securitySchemes:
-    BearerAuth:  # Définition du schéma de sécurité Bearer
-      type: http
-      scheme: bearer
-      bearerFormat: JWT  # Format du token (JSON Web Token)
-  schemas:
-    ApiResponse:
-      type: object
-      properties:
-        status:
-          type: string
-        message:
-          type: string
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+
+definitions:
+  TransactionUpdate:
+    type: object
+    properties:
+      field:
+        type: string
+        description: The field to update (e.g., status, category, note)
+      value:
+        type: string
+        description: The new value for the field
+    required:
+      - field
+      - value
+
+  ApiResponse:
+    type: object
+    properties:
+      status:
+        type: string
+      message:
+        type: string
+
+        

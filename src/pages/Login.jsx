@@ -69,7 +69,7 @@ function Login() {
                         type="email" 
                         onChange={(event) => setEmail(event.target.value)} 
                         required 
-                        autocomplete="username" // Ajout de l'attribut autocomplete
+                        autocomplete="username" 
                     />
                     <Formular 
                         label="Password" 
@@ -77,7 +77,7 @@ function Login() {
                         type="password" 
                         onChange={(event) => setPassword(event.target.value)} 
                         required 
-                        autocomplete="current-password" // Ajout de l'attribut autocomplete
+                        autocomplete="current-password" 
                     />
 
                     <div className="login_check">

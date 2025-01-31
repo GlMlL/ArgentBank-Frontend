@@ -13,7 +13,7 @@ function Formular({ label, type, content, value, onChange, placeholder, autocomp
                 placeholder={placeholder} 
                 onChange={onChange} 
                 autoComplete={autocomplete} 
-                readOnly={readOnly} // Ajout explicite de l'attribut readOnly
+                readOnly={readOnly} 
             />
         </div>
     );

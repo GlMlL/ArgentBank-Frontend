@@ -18,6 +18,8 @@ const getUserInfo = () => {
     }
 };
 
+
+
 // Création du slice Redux pour l'utilisateur et l'authentification
 const userSlice = createSlice({
     name: "user",
@@ -28,12 +30,13 @@ const userSlice = createSlice({
         userInfo: getUserInfo() || { firstName: "", lastName: "", userName: "", email: "" }, // Utilise les infos utilisateurs stockées si disponibles
     },
 
+    
+
     reducers: {
         // Action pour la connexion de l'utilisateur
         login(state, action) {
-            state.isAuthenticated = true; // Modifier le state global
-            state.token = action.payload.token; // Stocker le token dans le state global
-            //localStorage.setItem("authToken", action.payload.token); // Stocker le token dans le localStorage
+            state.isAuthenticated = true;              // Modifier le state global
+            state.token = action.payload.token;               // Stocker le token dans le state global
         },
 
         // Action pour la déconnexion de l'utilisateur

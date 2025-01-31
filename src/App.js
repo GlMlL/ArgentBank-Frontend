@@ -11,6 +11,7 @@ import Footer from './components/Footer/Footer';
 function App() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated || false);
  
+  
 
   return (
     <Router>
@@ -29,3 +30,4 @@ function App() {
   );
 }
 export default App;
+

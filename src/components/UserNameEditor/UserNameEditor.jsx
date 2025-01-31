@@ -68,15 +68,15 @@ function UserNameEditor() {
                 // Mode édition désactivé
                 <>
                     <h2 className="title-user">
-    Welcome back
-    <br />
-    {userProfile?.userName ? (
-        <>{userProfile.userName}</>
-    ) : (
-        <>{userProfile?.firstName} {userProfile?.lastName}</>
-    )}
-    !
-</h2>
+                        Welcome back
+                        <br />
+                        {userProfile?.userName ? (
+                            <>{userProfile.userName}</>
+                        ) : (
+                            <>{userProfile?.firstName} {userProfile?.lastName}</>
+                        )}
+                        !
+                    </h2>
                     <Button
                         content="Edit Name"
                         onClick={() => {
