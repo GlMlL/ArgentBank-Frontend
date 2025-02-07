@@ -13,9 +13,8 @@ function User() {
     // Utilise useCallback pour mémoriser fetchDataProfile et éviter sa recréation à chaque rendu
     const fetchDataProfile = useCallback(async (authToken) => {
         try {
-            const response = await axios.put(
+            const response = await axios.get(
                 "http://localhost:3001/api/v1/user/profile",
-                {},
                 {
                     headers: {
                         accept: "application/json",
@@ -24,10 +23,10 @@ function User() {
                     },
                 }
             );
-            
+    
             if (response.status === 200) {
                 const responseData = response.data.body;
-                dispatch(userProfile(responseData)); // Utilise userProfile pour mettre à jour les informations utilisateur dans Redux
+                dispatch(userProfile(responseData));
             } else {
                 console.error("Error response: ", response.statusText);
             }
@@ -35,13 +34,14 @@ function User() {
             console.error("Error fetching profile data:", error);
         }
     }, [dispatch]);
-
+    
     useEffect(() => {
         const authToken = localStorage.getItem("authToken");
         if (authToken) {
             fetchDataProfile(authToken);
         }
-    }, [fetchDataProfile]); // Ajoute fetchDataProfile dans la liste des dépendances
+    }, [fetchDataProfile]);
+     // Ajoute fetchDataProfile dans la liste des dépendances
 
     return (
         <main className="main_user">

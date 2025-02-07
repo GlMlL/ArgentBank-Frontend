@@ -13,8 +13,8 @@ function Login() {
     const dispatch = useDispatch() // useDispatch pour dispatcher des actions Redux
 
     // Stockage des valeurs form
-    const [email, setEmail] = useState("") // State local pour stocker l'email saisi
-    const [password, setPassword] = useState("") // State local pour stocker le mot de passe saisi
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
     const [errorMessage, setErrorMessage] = useState("")
     const [remember, setRemember] = useState(false)
 
@@ -54,22 +54,22 @@ function Login() {
     return (
         <main className="main-login">
             <section className="section-login">
-
+    
                 <div className="form_header">
                     <i className="fa fa-user-circle"></i>
                     <h2>Sign In</h2>
                 </div>
-
+    
                 <form onSubmit={handleSubmit}>
                     {errorMessage && <p className="error-login">{errorMessage}</p>}
-
+    
                     <Formular 
                         label="Username" 
                         content="email" 
                         type="email" 
                         onChange={(event) => setEmail(event.target.value)} 
                         required 
-                        autocomplete="username" 
+                        autocomplete="username" // Ajouté ici
                     />
                     <Formular 
                         label="Password" 
@@ -77,9 +77,9 @@ function Login() {
                         type="password" 
                         onChange={(event) => setPassword(event.target.value)} 
                         required 
-                        autocomplete="current-password" 
+                        autocomplete="current-password" // Ajouté ici
                     />
-
+    
                     <div className="login_check">
                         <input 
                             type="checkbox" 
@@ -90,13 +90,12 @@ function Login() {
                         />
                         <label htmlFor="remember">Remember me</label>
                     </div>
-
+    
                     <Button style={{ textDecoration: "underline" }} content="Sign In" className="btn-login" />
                 </form>
             </section>
         </main>
-
-    )
+    );
 }
 
-export default Login;
+export default Login

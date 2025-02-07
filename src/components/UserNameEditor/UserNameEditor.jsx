@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUsername } from '../../redux/reducers/authUserSlice';
+import { updateUsername} from '../../redux/reducers/authUserSlice';
 import '../../styles/UserNameEditor.css';
 import axios from "axios";
 import Formular from "../Formular/Formular";
@@ -8,8 +8,7 @@ import Button from "../Button/Button";
 
 function UserNameEditor() {
     const dispatch = useDispatch()
-    const userProfile = useSelector((state) => state.user.userInfo) ?? { firstName: "", lastName: "", userName: "", email: "" };
-// récupération des données user
+    const userProfile = useSelector((state) => state.user) // récupération des données user
     const userToken = useSelector((state) => state.user.token) // récupération du token
 
     const [isOpen, setIsOpen] = useState(false) // formulaire fermé par défaut
@@ -57,10 +56,9 @@ function UserNameEditor() {
     }
 
     useEffect(() => {
-        setUserName(userProfile.userName); // mise à jour username pour userProfile
+        setUserName(userProfile.userName) // mise à jour username pour userProfile
         
-        
-    }, [userProfile.userName ,userProfile.userEmail])
+    }, [userProfile.userName])
 
     return (
         <section className="section-user">
@@ -70,10 +68,12 @@ function UserNameEditor() {
                     <h2 className="title-user">
                         Welcome back
                         <br />
-                        {userProfile?.userName ? (
-                            <>{userProfile.userName}</>
+                        {!userProfile.userName ? (
+                            <>
+                                {userProfile.firstName} {userProfile.lastName}
+                            </>
                         ) : (
-                            <>{userProfile?.firstName} {userProfile?.lastName}</>
+                            <>{userProfile.userName} </>
                         )}
                         !
                     </h2>
@@ -87,7 +87,7 @@ function UserNameEditor() {
             ) : (
                 // Mode édition activé
                 <>
-                    <h2 className="title-user">Edit user info</h2>
+                     <h2 className="title-user">Edit user info</h2>
                     <div className="modal">
                         <form onSubmit={saveMonney}>
                             <Formular 
@@ -130,6 +130,5 @@ function UserNameEditor() {
         </section>
     )
 }
-
 
 export default UserNameEditor;
