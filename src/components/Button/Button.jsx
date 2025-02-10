@@ -1,11 +1,11 @@
-import React from 'react';
 import '../../styles/button.css';
-function Button({ content, event, onClick }) {
+
+function Button({ content, onClick }) {
   return (
-      <button event={event} onClick={onClick}>
+      <button onClick={onClick}>
           {content}
       </button>
-  )
+  );
 }
 
 export default Button;

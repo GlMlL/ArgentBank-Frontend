@@ -2,7 +2,7 @@ import React from 'react'
 import '../../styles/Banner.css';
 
 
-function banner() {
+function Banner() {
     return (
         <section className="hero_banner">
             <article className="content_hero_banner">
@@ -20,4 +20,4 @@ function banner() {
 
 }
 
-export default banner
+export default Banner

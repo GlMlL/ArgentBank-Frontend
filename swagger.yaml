@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  title: Transaction API
+  title:  Bank Argent Transaction API documentation
   description: API for managing transactions and related operations.
   version: '1.0.0'
 
@@ -13,15 +13,15 @@ paths:
   /user/transactionId:
     patch:
       security:
-        - Bearer: []  # Correspondance avec la définition de sécurité
+        - Bearer: []
       tags:
         - Transaction Module
-      summary: Update Transaction Information or Note
-      description: API to update specific fields of a transaction, including notes.
+      summary: Update Transaction Information
+      description: API to update transaction fields including note, category, and status.
       parameters:
         - in: body
           name: body
-          description: Fields to update in the transaction
+          description: Fields to update in the transaction. All fields must be provided.
           required: true
           schema:
             $ref: '#/definitions/TransactionUpdate'
@@ -51,15 +51,19 @@ definitions:
   TransactionUpdate:
     type: object
     properties:
-      field:
+      note:
         type: string
-        description: The field to update (e.g., status, category, note)
-      value:
+        description: The note associated with the transaction.
+      category:
         type: string
-        description: The new value for the field
+        description: The category of the transaction.
+      status:
+        type: string
+        description: The current status of the transaction.
     required:
-      - field
-      - value
+      - note
+      - category
+      - status
 
   ApiResponse:
     type: object
@@ -68,5 +72,3 @@ definitions:
         type: string
       message:
         type: string
-
-        

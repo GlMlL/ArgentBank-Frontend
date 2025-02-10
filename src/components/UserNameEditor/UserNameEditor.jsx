@@ -15,7 +15,7 @@ function UserNameEditor() {
     const [editedName, setUserName] = useState(userProfile.userName) // définit état username
 
     // Fermeture formulaire d'édition + save
-    const saveMonney = async (event) => {
+    const saveUserName = async (event) => {
         event.preventDefault()
         try {
             // Envoie requête API
@@ -89,7 +89,7 @@ function UserNameEditor() {
                 <>
                      <h2 className="title-user">Edit user info</h2>
                     <div className="modal">
-                        <form onSubmit={saveMonney}>
+                        <form onSubmit={saveUserName}>
                             <Formular 
                                 label="User Name :" 
                                 type="text" 
