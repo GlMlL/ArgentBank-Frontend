@@ -1,6 +1,7 @@
 swagger: '2.0'
+
 info:
-  title:  Bank Argent Transaction API documentation
+  title: Bank Argent Transaction API documentation
   description: API for managing transactions and related operations.
   version: '1.0.0'
 
@@ -10,7 +11,7 @@ schemes:
   - http
 
 paths:
-  /user/transactionId:
+  /user/{transactionId}:
     patch:
       security:
         - Bearer: []
@@ -19,6 +20,11 @@ paths:
       summary: Update Transaction Information
       description: API to update transaction fields including note, category, and status.
       parameters:
+        - in: path
+          name: transactionId
+          required: true
+          type: string
+          description: The ID of the transaction to update.
         - in: body
           name: body
           description: Fields to update in the transaction. All fields must be provided.
@@ -34,6 +40,56 @@ paths:
             $ref: '#/definitions/ApiResponse'
         '400':
           description: Invalid request payload
+        '401':
+          description: Unauthorized access
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal server error
+
+  /transactions/current-month:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Get all transactions for the current month, grouped by account
+      description: Retrieve all transactions for the current month, organized by account.
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: List of transactions grouped by account
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TransactionsByAccount'
+        '401':
+          description: Unauthorized access
+        '500':
+          description: Internal server error
+
+  /transactions/{transactionId}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Get transaction details
+      description: Retrieve details of a specific transaction including status, category, and note.
+      parameters:
+        - name: transactionId
+          in: path
+          required: true
+          type: string
+          description: ID of the transaction to retrieve
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction details retrieved successfully
+          schema:
+            $ref: '#/definitions/TransactionDetails'
         '401':
           description: Unauthorized access
         '404':
@@ -64,6 +120,43 @@ definitions:
       - note
       - category
       - status
+
+  TransactionsByAccount:
+    type: object
+    properties:
+      accountId:
+        type: string
+        description: The account ID
+      transactions:
+        type: array
+        items:
+          $ref: '#/definitions/TransactionDetails'
+
+  TransactionDetails:
+    type: object
+    properties:
+      transactionId:
+        type: string
+        description: Unique identifier of the transaction
+      amount:
+        type: number
+        description: Transaction amount
+      currency:
+        type: string
+        description: Currency of the transaction (e.g., USD, EUR)
+      date:
+        type: string
+        format: date-time
+        description: Date of the transaction
+      status:
+        type: string
+        description: Current status of the transaction (e.g., pending, completed)
+      category:
+        type: string
+        description: Category of the transaction (e.g., food, shopping)
+      note:
+        type: string
+        description: Optional note added to the transaction
 
   ApiResponse:
     type: object

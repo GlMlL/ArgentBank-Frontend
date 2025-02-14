@@ -47,7 +47,7 @@ function Login() {
             }
         } catch (error) {
             // Gestion des erreurs non prévues
-            setErrorMessage("An error has occurred.") // Mise à jour du message d'erreur
+            setErrorMessage("Incorrect email or password. Please try again.") // Mise à jour du message d'erreur
         }
     }
 
