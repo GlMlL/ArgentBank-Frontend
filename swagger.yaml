@@ -11,7 +11,34 @@ schemes:
   - http
 
 paths:
-  /user/{transactionId}:
+  /transactions/{transactionId}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Get transaction details
+      description: Retrieve details of a specific transaction including status, category, and note.
+      parameters:
+        - name: transactionId
+          in: path
+          required: true
+          type: string
+          description: ID of the transaction to retrieve
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction details retrieved successfully
+          schema:
+            $ref: '#/definitions/TransactionDetails'
+        '401':
+          description: Unauthorized access
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal server error
+
     patch:
       security:
         - Bearer: []
@@ -66,34 +93,6 @@ paths:
               $ref: '#/definitions/TransactionsByAccount'
         '401':
           description: Unauthorized access
-        '500':
-          description: Internal server error
-
-  /transactions/{transactionId}:
-    get:
-      security:
-        - Bearer: []
-      tags:
-        - Transaction Module
-      summary: Get transaction details
-      description: Retrieve details of a specific transaction including status, category, and note.
-      parameters:
-        - name: transactionId
-          in: path
-          required: true
-          type: string
-          description: ID of the transaction to retrieve
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Transaction details retrieved successfully
-          schema:
-            $ref: '#/definitions/TransactionDetails'
-        '401':
-          description: Unauthorized access
-        '404':
-          description: Transaction not found
         '500':
           description: Internal server error
 
